@@ -5,5 +5,8 @@
     <file url="file://$PROJECT_DIR$/discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/telegram-handle-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/telegram-notification-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/telegram-service/src/main/java" charset="UTF-8" />
   </component>
 </project>

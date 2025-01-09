@@ -25,5 +25,9 @@
 
     <modules>
         <module>configuration-service</module>
+        <module>discovery-service</module>
+        <module>telegram-handle-service</module>
+        <module>telegram-notification-service</module>
+        <module>telegram-service</module>
     </modules>
 </project>

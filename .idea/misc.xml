@@ -7,6 +7,9 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/configuration-service/pom.xml" />
         <option value="$PROJECT_DIR$/discovery-service/pom.xml" />
+        <option value="$PROJECT_DIR$/telegram-handle-service/pom.xml" />
+        <option value="$PROJECT_DIR$/telegram-notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/telegram-service/pom.xml" />
       </list>
     </option>
   </component>
