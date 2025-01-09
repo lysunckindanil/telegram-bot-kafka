@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Service
 @EnableFeignClients
 public class HandleTelegramService {
-    private final HandleTelegramClient handleTelegramClient;
+    private final TelegramHandleService telegramHandleService;
 
     public String handleTextMessage(long chat_id, String message) {
         TelegramMessageDto body = TelegramMessageDto.builder().chat_id(chat_id).message(message).build();
-        return handleTelegramClient.handleTextMessage(body).getMessage();
+        return telegramHandleService.handleTextMessage(body).getMessage();
     }
 
-    @FeignClient("handle-telegram-service")
-    interface HandleTelegramClient {
+    @FeignClient("telegram-handle-service")
+    interface TelegramHandleService {
         @RequestMapping(method = RequestMethod.POST, value = "/api/handle_text_message")
         TelegramMessageResponseDto handleTextMessage(@RequestBody TelegramMessageDto telegramMessage);
     }
