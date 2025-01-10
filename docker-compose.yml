@@ -28,12 +28,6 @@ services:
 
   configuration-service:
     image: docker.io/library/configuration-service:0.0.1-SNAPSHOT
-    healthcheck:
-      test: curl --fail http://localhost || exit 0
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
     depends_on:
       - kafka
     ports:
@@ -41,15 +35,8 @@ services:
 
   discovery-service:
     image: docker.io/library/discovery-service:0.0.1-SNAPSHOT
-    healthcheck:
-      test: "curl --fail --silent localhost:8761/actuator/health | grep UP || exit 1"
-      interval: 20s
-      timeout: 5s
-      retries: 5
-      start_period: 25s
     depends_on:
-      configuration-service:
-        condition: service_healthy
+      - configuration-service
     ports:
       - "8761:8761"
 
@@ -59,31 +46,18 @@ services:
       POSTGRES_USER: gen_user
       POSTGRES_PASSWORD: bp4JSd7T3D5LzQmV
       POSTGRES_DB: notification_telegram_bot_kafka
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U gen_user -d notification_telegram_bot_kafka" ]
-      start_period: 20s
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
   telegram-service:
     image: docker.io/library/telegram-service:0.0.1-SNAPSHOT
     depends_on:
-      discovery-service:
-        condition: service_healthy
+      - discovery-service
 
   telegram-handle-service:
     image: docker.io/library/telegram-handle-service:0.0.1-SNAPSHOT
     depends_on:
-      discovery-service:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
+      - discovery-service
 
   telegram-notification-service:
     image: docker.io/library/telegram-notification-service:0.0.1-SNAPSHOT
     depends_on:
-      discovery-service:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
+      - discovery-service
