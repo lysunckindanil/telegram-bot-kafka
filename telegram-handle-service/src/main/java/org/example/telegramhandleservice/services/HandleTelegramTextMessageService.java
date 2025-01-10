@@ -8,9 +8,7 @@ import org.example.telegramhandleservice.repos.ChatRepository;
 import org.example.telegramhandleservice.repos.ChatSessionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
@@ -35,12 +33,12 @@ public class HandleTelegramTextMessageService {
                 default -> "I don't know that command!";
             };
         if (sessionStatus.get().getSession().equals("send_any")) {
-            sendNotificationAny(message);
+            notificationService.sendMessageAny(message);
             chatSessionRepository.deleteById(chat_id);
             return "Your message has been sent to the random person!";
         }
         if (sessionStatus.get().getSession().equals("send_all")) {
-            sendNotificationAll(message);
+            notificationService.sendMessageAll(message);
             chatSessionRepository.deleteById(chat_id);
             return "Your message has been sent to everybody!";
         }
@@ -49,20 +47,6 @@ public class HandleTelegramTextMessageService {
 
     private Optional<ChatSession> getSessionStatus(long chat_id) {
         return chatSessionRepository.findById(chat_id);
-    }
-
-    private void sendNotificationAny(String message) {
-        Random random = new Random();
-        List<Chat> chats = chatRepository.findAll().stream().filter(x -> x.getStatus().equals("enabled")).toList();
-        if (!chats.isEmpty())
-            notificationService.sendMessage(message, chats.get(random.nextInt(chats.size())).getChatId());
-    }
-
-    private void sendNotificationAll(String message) {
-        chatRepository.findAll().stream()
-                .filter(x -> x.getStatus().equals("enabled"))
-                .map(Chat::getChatId)
-                .forEach((chat_id -> notificationService.sendMessage(message, chat_id)));
     }
 
     private String start(long chat_id) {

@@ -2,7 +2,6 @@ package org.example.telegramhandleservice.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.example.telegramhandleservice.dto.TelegramMessageDto;
 import org.example.telegramhandleservice.dto.TelegramMessageResponseDto;
 import org.example.telegramhandleservice.services.HandleTelegramTextMessageService;

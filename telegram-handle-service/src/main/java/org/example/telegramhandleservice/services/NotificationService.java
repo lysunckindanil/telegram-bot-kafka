@@ -2,7 +2,7 @@ package org.example.telegramhandleservice.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.telegramhandleservice.dto.TelegramMessageDto;
+import org.example.telegramhandleservice.dto.TelegramMessageTopicDto;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class NotificationService {
-    private final KafkaTemplate<String, TelegramMessageDto> kafkaTemplate;
+    private final KafkaTemplate<String, TelegramMessageTopicDto> kafkaTemplate;
 
-    public void sendMessage(String message, long chat_id) {
-        TelegramMessageDto telegramMessageDto = TelegramMessageDto.builder().chat_id(chat_id).message(message).build();
-        kafkaTemplate.send("text_notification", telegramMessageDto);
-        log.info("Message sent to text_notification topic");
+    public void sendMessageAny(String message) {
+        TelegramMessageTopicDto messageTopicDto = TelegramMessageTopicDto.builder().message(message).build();
+        kafkaTemplate.send("send-any", messageTopicDto);
+        log.info("Message sent to send_any topic");
+    }
+
+    public void sendMessageAll(String message) {
+        TelegramMessageTopicDto messageTopicDto = TelegramMessageTopicDto.builder().message(message).build();
+        kafkaTemplate.send("send-all", messageTopicDto);
+        log.info("Message sent to send_all topic");
     }
 }
