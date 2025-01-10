@@ -59,3 +59,10 @@ services:
     image: docker.io/library/telegram-notification-service:0.0.1-SNAPSHOT
     depends_on:
       - discovery-service
+
+  gateway-service:
+    image: docker.io/library/gateway-service:0.0.1-SNAPSHOT
+    depends_on:
+      - discovery-service
+    ports:
+      - "8000:8000"
