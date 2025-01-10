@@ -24,11 +24,6 @@ public class TelegramHandleController {
     @PostMapping("/handle_text_message")
     public TelegramMessageResponseDto handleTextMessage(@RequestBody TelegramMessageDto telegramMessageDto) {
         String message = handleTelegramTextMessageService.handleTelegramTextMessage(telegramMessageDto);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         return TelegramMessageResponseDto.builder().message(message + "\n\n" + instance_id).build();
     }
 }

@@ -23,8 +23,7 @@ public class TelegramController {
 
     @PostMapping("send_text_message")
     public void sendMessage(@RequestBody TelegramMessageDto message) {
-        log.info(message.toString());
-//        telegramBot.sendMessage(message.getChat_id(), message.getMessage());
+        telegramBot.sendMessage(message.getChat_id(), message.getMessage());
     }
 
     @PostMapping("test_bot")
