@@ -27,11 +27,11 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   configuration-service:
-    build: ./configuration-service
+    image: docker.io/library/configuration-service:0.0.1-SNAPSHOT
     healthcheck:
-      test: "curl --fail --silent localhost:8888/actuator/health | grep UP || exit 1"
+      test: curl --fail http://localhost || exit 0
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 5
       start_period: 20s
     depends_on:
@@ -40,7 +40,7 @@ services:
       - "8888:8888"
 
   discovery-service:
-    build: ./discovery-service
+    image: docker.io/library/discovery-service:0.0.1-SNAPSHOT
     healthcheck:
       test: "curl --fail --silent localhost:8761/actuator/health | grep UP || exit 1"
       interval: 20s
@@ -67,13 +67,13 @@ services:
       retries: 5
 
   telegram-service:
-    build: ./telegram-service
+    image: docker.io/library/telegram-service:0.0.1-SNAPSHOT
     depends_on:
       discovery-service:
         condition: service_healthy
 
   telegram-handle-service:
-    build: ./telegram-handle-service
+    image: docker.io/library/telegram-handle-service:0.0.1-SNAPSHOT
     depends_on:
       discovery-service:
         condition: service_healthy
@@ -81,7 +81,7 @@ services:
         condition: service_healthy
 
   telegram-notification-service:
-    build: ./telegram-notification-service
+    image: docker.io/library/telegram-notification-service:0.0.1-SNAPSHOT
     depends_on:
       discovery-service:
         condition: service_healthy
