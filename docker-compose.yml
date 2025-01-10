@@ -52,17 +52,6 @@ services:
     depends_on:
       - discovery-service
 
-  telegram-service1:
-    image: docker.io/library/telegram-service:0.0.1-SNAPSHOT
-    depends_on:
-      - discovery-service
-
-  telegram-service2:
-    image: docker.io/library/telegram-service:0.0.1-SNAPSHOT
-    depends_on:
-      - discovery-service
-
-
 # telegram handle service
 
   telegram-handle-service:
