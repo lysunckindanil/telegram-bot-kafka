@@ -59,29 +59,9 @@ services:
     depends_on:
       - discovery-service
 
-  telegram-handle-service1:
-    image: docker.io/library/telegram-handle-service:0.0.1-SNAPSHOT
-    depends_on:
-      - discovery-service
-
-  telegram-handle-service2:
-    image: docker.io/library/telegram-handle-service:0.0.1-SNAPSHOT
-    depends_on:
-      - discovery-service
-
 # telegram notification service
 
   telegram-notification-service:
-    image: docker.io/library/telegram-notification-service:0.0.1-SNAPSHOT
-    depends_on:
-      - discovery-service
-
-  telegram-notification-service1:
-    image: docker.io/library/telegram-notification-service:0.0.1-SNAPSHOT
-    depends_on:
-      - discovery-service
-
-  telegram-notification-service2:
     image: docker.io/library/telegram-notification-service:0.0.1-SNAPSHOT
     depends_on:
       - discovery-service
