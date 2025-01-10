@@ -38,5 +38,6 @@
         <module>telegram-handle-service</module>
         <module>telegram-notification-service</module>
         <module>telegram-service</module>
+        <module>gateway-service</module>
     </modules>
 </project>
