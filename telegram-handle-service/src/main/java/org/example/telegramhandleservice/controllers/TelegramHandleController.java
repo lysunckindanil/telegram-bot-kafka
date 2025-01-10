@@ -25,7 +25,7 @@ public class TelegramHandleController {
     public TelegramMessageResponseDto handleTextMessage(@RequestBody TelegramMessageDto telegramMessageDto) {
         String message = handleTelegramTextMessageService.handleTelegramTextMessage(telegramMessageDto);
         try {
-            Thread.sleep(100);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
