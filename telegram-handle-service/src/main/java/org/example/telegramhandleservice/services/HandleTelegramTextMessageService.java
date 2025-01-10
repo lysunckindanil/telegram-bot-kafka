@@ -19,29 +19,29 @@ public class HandleTelegramTextMessageService {
     private final NotificationService notificationService;
 
     public String handleTelegramTextMessage(TelegramMessageDto telegramMessageDto) {
-        String message = telegramMessageDto.getMessage();
-        long chat_id = telegramMessageDto.getChat_id();
-        Optional<ChatSession> sessionStatus = getSessionStatus(chat_id);
-        if (sessionStatus.isEmpty())
-            return switch (message) {
-                case "/start" -> start(chat_id);
-                case "/status" -> status(chat_id);
-                case "/send_any" -> sendAny(chat_id);
-                case "/send_all" -> sendAll(chat_id);
-                case "/enable" -> enable(chat_id);
-                case "/disable" -> disable(chat_id);
-                default -> "I don't know that command!";
-            };
-        if (sessionStatus.get().getSession().equals("send_any")) {
-            notificationService.sendMessageAny(message);
-            chatSessionRepository.deleteById(chat_id);
-            return "Your message has been sent to the random person!";
-        }
-        if (sessionStatus.get().getSession().equals("send_all")) {
-            notificationService.sendMessageAll(message);
-            chatSessionRepository.deleteById(chat_id);
-            return "Your message has been sent to everybody!";
-        }
+//        String message = telegramMessageDto.getMessage();
+//        long chat_id = telegramMessageDto.getChat_id();
+//        Optional<ChatSession> sessionStatus = getSessionStatus(chat_id);
+//        if (sessionStatus.isEmpty())
+//            return switch (message) {
+//                case "/start" -> start(chat_id);
+//                case "/status" -> status(chat_id);
+//                case "/send_any" -> sendAny(chat_id);
+//                case "/send_all" -> sendAll(chat_id);
+//                case "/enable" -> enable(chat_id);
+//                case "/disable" -> disable(chat_id);
+//                default -> "I don't know that command!";
+//            };
+//        if (sessionStatus.get().getSession().equals("send_any")) {
+//            notificationService.sendMessageAny(message);
+//            chatSessionRepository.deleteById(chat_id);
+//            return "Your message has been sent to the random person!";
+//        }
+//        if (sessionStatus.get().getSession().equals("send_all")) {
+//            notificationService.sendMessageAll(message);
+//            chatSessionRepository.deleteById(chat_id);
+//            return "Your message has been sent to everybody!";
+//        }
         return "I can't recognize your status!";
     }
 
