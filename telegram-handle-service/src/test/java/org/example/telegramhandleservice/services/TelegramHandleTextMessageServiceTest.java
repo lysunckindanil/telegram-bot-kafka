@@ -22,20 +22,20 @@ import static org.mockito.ArgumentMatchers.any;
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @ExtendWith(MockitoExtension.class)
-class HandleTelegramTextMessageServiceTest {
-    private final HandleTelegramTextMessageService service;
+class TelegramHandleTextMessageServiceTest {
+    private final TelegramHandleTextMessageService service;
     private final NotificationService notificationService;
     private final ChatRepository chatRepository;
     private final ChatSessionRepository chatSessionRepository;
 
     @Autowired
-    public HandleTelegramTextMessageServiceTest(ChatRepository chatRepository, ChatSessionRepository chatSessionRepository) {
+    public TelegramHandleTextMessageServiceTest(ChatRepository chatRepository, ChatSessionRepository chatSessionRepository) {
         this.chatRepository = chatRepository;
         this.chatSessionRepository = chatSessionRepository;
         notificationService = Mockito.mock(NotificationService.class);
         Mockito.doNothing().when(notificationService).sendMessageAny(any());
         Mockito.doNothing().when(notificationService).sendMessageAll(any());
-        this.service = new HandleTelegramTextMessageService(chatRepository, chatSessionRepository, notificationService);
+        this.service = new TelegramHandleTextMessageService(chatRepository, chatSessionRepository, notificationService);
     }
 
 

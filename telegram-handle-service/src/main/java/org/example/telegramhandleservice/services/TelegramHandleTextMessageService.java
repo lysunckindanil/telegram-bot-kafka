@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class HandleTelegramTextMessageService {
+public class TelegramHandleTextMessageService {
 
     private final ChatRepository chatRepository;
     private final ChatSessionRepository chatSessionRepository;
