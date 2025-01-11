@@ -15,12 +15,10 @@ public class NotificationService {
     public void sendMessageAny(String message) {
         TelegramMessageTopicDto messageTopicDto = TelegramMessageTopicDto.builder().message(message).build();
         kafkaTemplate.send("send-any", messageTopicDto);
-        log.info("Message sent to send_any topic");
     }
 
     public void sendMessageAll(String message) {
         TelegramMessageTopicDto messageTopicDto = TelegramMessageTopicDto.builder().message(message).build();
         kafkaTemplate.send("send-all", messageTopicDto);
-        log.info("Message sent to send_all topic");
     }
 }
